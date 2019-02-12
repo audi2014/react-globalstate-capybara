@@ -5,7 +5,7 @@ import Test from "./Test";
 import Store from "./lib/store";
 import withGlobalState from "./lib/withGlobalState";
 
-const store = new Store({ users: [], time: "" });
+const store = new Store({ users: ["one"], time: "" });
 
 // store.applyMiddleware((value, next) => {
 //   const result = next(value);
