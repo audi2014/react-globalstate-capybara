@@ -8,7 +8,7 @@ import withGlobalState from "./lib/withGlobalState";
 /** INIT */
 const store = new Store({ users: ["a", "z", "u"], time: "" });
 store.applyDispatchMiddleware(promiseMiddleware);
-
+/** create actions */
 const pushUser = store.createAction("users", push);
 const clearUsers = store.createAction("users", clear);
 const sortUsers = store.createAction("users", sort);
@@ -24,10 +24,12 @@ const fetchTime = store.createAction("time", (e, arg1) => {
   });
 });
 
+/** bind componet with store props */
 const Users = withGlobalState(View, store, ["users"]);
 const Time = withGlobalState(View, store, ["time"]);
 const All = withGlobalState(View, store, ["time", "users"]);
 
+/** just test */
 function App() {
   return (
     <div>
@@ -39,9 +41,9 @@ function App() {
             clear: () => clearUsers(),
             set: () => setUsers(["a", "u", "d"]),
             sort: () => sortUsers((a, b) => a.localeCompare(b)),
+            sortDesc: () => sortUsers((a, b) => b.localeCompare(a)),
             filter: () =>
-              filterUsers(prompt("name is:"), (value, u) => u === value),
-            sortDesc: () => sortUsers((a, b) => b.localeCompare(a))
+              filterUsers(prompt("name is:"), (value, u) => u === value)
           }}
         />
       </p>
