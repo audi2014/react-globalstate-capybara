@@ -15,7 +15,10 @@ const sortUsers = store.createAction("users", sort);
 const filterUsers = store.createAction("users", filter);
 const setUsers = store.createAction("users", set);
 
+const setTime = store.createAction("time", (e, v) => v);
+
 const fetchTime = store.createAction("time", (e, arg1) => {
+  //setTime("loading");
   return new Promise(function(resolve, reject) {
     setTimeout(() => {
       const d = new Date();
