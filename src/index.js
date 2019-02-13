@@ -1,65 +1,74 @@
 import React from "react";
 import ReactDOM from "react-dom";
-
-import Test from "./Test";
+import { View, Router } from "./components";
 import Store from "./lib/store";
+import promiseMiddleware from "./lib/store/middlewares/promise";
+import { set, push, clear, sort, filter } from "./lib/store/mutations/array";
 import withGlobalState from "./lib/withGlobalState";
+/** INIT */
+const store = new Store({ users: ["a", "z", "u"], time: "" });
+store.applyDispatchMiddleware(promiseMiddleware);
 
-const store = new Store({ users: ["one"], time: "" });
+const pushUser = store.createAction("users", push);
+const clearUsers = store.createAction("users", clear);
+const sortUsers = store.createAction("users", sort);
+const filterUsers = store.createAction("users", filter);
+const setUsers = store.createAction("users", set);
 
-store.applyDispatchMiddleware((k, v, getState, dispatch) => {
-  if (typeof v === "object" && typeof v.then === "function") {
-    v.then(r => dispatch(k, r));
-  } else {
-    dispatch(k, v);
-  }
-});
-const push = ({ key, value }, nextValue) => {
-  return [...value, nextValue];
-};
-const set = ({ key, value }, nextValue) => {
-  return nextValue;
-};
-
-const pushToUsers = store.createAction("users", push);
-
-const fetchTime = (timezone = "US") => {
+const fetchTime = store.createAction("time", (e, arg1) => {
   return new Promise(function(resolve, reject) {
     setTimeout(() => {
-      resolve(new Date().toLocaleString(timezone));
-    });
+      const d = new Date();
+      resolve(d[arg1]());
+    }, 200);
   });
-};
+});
 
-const fetchTimeToTime = store.createAction("time", fetchTime);
-
-const Users = withGlobalState(Test, store, ["users"]);
-
-const Time = withGlobalState(Test, store, ["time"]);
-
-class Router extends React.Component {
-  state = { v: 0 };
-  render() {
-    if (!this.props.children) return null;
-    return (
-      <div>
-        <input
-          type="number"
-          value={this.state.v}
-          onChange={e => this.setState({ v: +e.currentTarget.value })}
-        />
-        {this.props.children[this.state.v]}
-      </div>
-    );
-  }
-}
+const Users = withGlobalState(View, store, ["users"]);
+const Time = withGlobalState(View, store, ["time"]);
+const All = withGlobalState(View, store, ["time", "users"]);
 
 function App() {
   return (
     <div>
-      <Users action={() => pushToUsers("name")} />
-      <Time action={() => fetchTimeToTime()} />
-      <Router />
+      <p>
+        Users
+        <Users
+          actions={{
+            push: () => pushUser(prompt("name is:")),
+            clear: () => clearUsers(),
+            set: () => setUsers(["a", "u", "d"]),
+            sort: () => sortUsers((a, b) => a.localeCompare(b)),
+            filter: () =>
+              filterUsers(prompt("name is:"), (value, u) => u === value),
+            sortDesc: () => sortUsers((a, b) => b.localeCompare(a))
+          }}
+        />
+      </p>
+      <p>
+        Time
+        <Time
+          actions={{
+            fetchMilliseconds: () => fetchTime("getMilliseconds"),
+            fetchLocaleString: () => fetchTime("toLocaleString")
+          }}
+        />
+      </p>
+      <p>to test unsubscribe:</p>
+      <Router>
+        <p>
+          All
+          <All />
+        </p>
+        <p>
+          Time
+          <Time />
+        </p>
+        <p>
+          Users
+          <Users />
+        </p>
+      </Router>
     </div>
   );
 }

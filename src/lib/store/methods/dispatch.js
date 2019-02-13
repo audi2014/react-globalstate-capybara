@@ -1,10 +1,9 @@
-export default function(key, next, getState, getSubscriptions, setState) {
+export default (key, value, { getState, getSubscriptions, setState }) => {
   const prev = getState(key);
-
-  if (prev !== next) {
+  if (prev !== value) {
     getSubscriptions().forEach(([scb, keys]) => {
-      keys.includes(key) ? scb({ key, next, prev }) : null;
+      keys.includes(key) ? scb({ key, next: value, prev }) : null;
     });
-    setState({ [key]: next });
+    setState({ [key]: value });
   }
-}
+};

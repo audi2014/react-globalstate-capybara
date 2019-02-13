@@ -1,4 +1,4 @@
-const subscribe = (cb, storeprops, getSubscriptions, getState) => {
+export default (cb, storeprops, { getSubscriptions, getState }) => {
   const subscriptions = getSubscriptions();
   if (!subscriptions.find(([scb, keys]) => scb === cb)) {
     subscriptions.push([cb, storeprops]);
@@ -13,4 +13,3 @@ const subscribe = (cb, storeprops, getSubscriptions, getState) => {
   }
   return subscriptions;
 };
-export default subscribe;
