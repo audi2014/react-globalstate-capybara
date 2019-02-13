@@ -1,9 +1,9 @@
 // import { DispatchEvent } from "./events";
-const createAction = (key, mutation, getState, setState) => {
+const createAction = (key, mutation, getState, dispatch) => {
   return (...actionArgs) => {
     const prev = getState(key);
     const next = mutation({ key, value: prev }, ...actionArgs);
-    return setState(key, next);
+    dispatch(key, next);
   };
 };
 export default createAction;

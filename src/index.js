@@ -7,14 +7,13 @@ import withGlobalState from "./lib/withGlobalState";
 
 const store = new Store({ users: ["one"], time: "" });
 
-// store.applyMiddleware((value, next) => {
-//   const result = next(value);
-//   if (typeof result === "function") {
-//     // console.log("function", result(dispatchEvent.actionArgs));
-//   } else {
-//     return result;
-//   }
-// });
+store.applyDispatchMiddleware((k, v, getState, dispatch) => {
+  if (typeof v === "object" && typeof v.then === "function") {
+    v.then(r => dispatch(k, r));
+  } else {
+    dispatch(k, v);
+  }
+});
 const push = ({ key, value }, nextValue) => {
   return [...value, nextValue];
 };
@@ -23,9 +22,8 @@ const set = ({ key, value }, nextValue) => {
 };
 
 const pushToUsers = store.createAction("users", push);
-const setTime = store.createAction("time", setTime);
 
-const fetchTime = (timezone = "US") => disatch => {
+const fetchTime = (timezone = "US") => {
   return new Promise(function(resolve, reject) {
     setTimeout(() => {
       resolve(new Date().toLocaleString(timezone));
