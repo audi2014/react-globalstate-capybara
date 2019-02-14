@@ -9,23 +9,49 @@ import withGlobalState from "./lib/withGlobalState";
 const store = new Store({ users: ["a", "z", "u"], time: "" });
 store.applyDispatchMiddleware(promiseMiddleware);
 /** create actions */
-const pushUser = store.createAction("users", push);
-const clearUsers = store.createAction("users", clear);
-const sortUsers = store.createAction("users", sort);
-const filterUsers = store.createAction("users", filter);
-const setUsers = store.createAction("users", set);
 
-const setTime = store.createAction("time", (e, v) => v);
+// const pushUser = store.createAction("users", push);
+// const clearUsers = store.createAction("users", clear);
+// const sortUsers = store.createAction("users", sort);
+// const filterUsers = store.createAction("users", filter);
+// const setUsers = store.createAction("users", set);
 
-const fetchTime = store.createAction("time", (e, arg1) => {
-  //setTime("loading");
-  return new Promise(function(resolve, reject) {
-    setTimeout(() => {
-      const d = new Date();
-      resolve(d[arg1]());
-    }, 200);
-  });
+// const [
+//   pushUser,
+//   clearUsers,
+//   sortUsers,
+//   filterUsers,
+//   setUsers
+// ] = store.createAction("users", [push, clear, sort, filter, set]);
+
+const {
+  pushUser,
+  clearUsers,
+  sortUsers,
+  filterUsers,
+  setUsers
+} = store.createAction("users", {
+  pushUser: push,
+  clearUsers: clear,
+  sortUsers: sort,
+  filterUsers: filter,
+  setUsers: set
 });
+
+const [setTime, fetchTime] = store.createAction("time", [
+  // 0 -> as setTime
+  (e, v) => v,
+  // 1 -> as fetchTime
+  (e, arg1) => {
+    //setTime("loading");
+    return new Promise(function(resolve, reject) {
+      setTimeout(() => {
+        const d = new Date();
+        resolve(d[arg1]());
+      }, 200);
+    });
+  }
+]);
 
 /** bind componet with store props */
 const Users = withGlobalState(View, store, ["users"]);
@@ -55,7 +81,8 @@ function App() {
         <Time
           actions={{
             fetchMilliseconds: () => fetchTime("getMilliseconds"),
-            fetchLocaleString: () => fetchTime("toLocaleString")
+            fetchLocaleString: () => fetchTime("toLocaleString"),
+            setTime: ({ v = new Date() }) => setTime(v)
           }}
         />
       </p>
