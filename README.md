@@ -1,13 +1,22 @@
+
+|[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/audi2014/react-globalstate-capybara/blob/master/LICENSE)|  ![enter image description here](https://github.com/audi2014/react-globalstate-capybara/raw/master/CoreConcepts.jpg) |
+|--|--|
+| [![npm version](https://img.shields.io/npm/v/react-globalstate-capybara.svg?style=flat)](https://www.npmjs.com/package/react-globalstate-capybara) | [![npm](https://img.shields.io/npm/dw/react-globalstate-capybara.svg)](https://www.npmjs.com/package/react-globalstate-capybara) |
+| ![](https://img.shields.io/github/languages/code-size/audi2014/react-globalstate-capybara.svg?style=flat) | |
+| ![](https://img.shields.io/bundlephobia/min/react-globalstate-capybara.svg?style=flat)|  |
+
+
+
+
+
+
+
+
+
+
 # [react-globalstate-capybara](https://github.com/audi2014/react-globalstate-capybara/)
 
-[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/audi2014/react-globalstate-capybara/blob/master/LICENSE)
-[![npm version](https://img.shields.io/npm/v/react-globalstate-capybara.svg?style=flat)](https://www.npmjs.com/package/react-globalstate-capybara)
-[![npm](https://img.shields.io/npm/dw/react-globalstate-capybara.svg)](https://www.npmjs.com/package/react-globalstate-capybara)
-[![npm](https://img.shields.io/npm/v/react-globalstate-capybara.svg)](https://www.npmjs.com/package/react-globalstate-capybara)
-![](https://img.shields.io/github/languages/code-size/audi2014/react-globalstate-capybara.svg?style=flat)
-![](https://img.shields.io/bundlephobia/min/react-globalstate-capybara.svg?style=flat)
-
-# Global state manager for react
+### Global state manager for react
 
 ### Example:
 
