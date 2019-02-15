@@ -1,6 +1,7 @@
-# [react-globalstate-capybara](https://reactjs.org/) 
+# [react-globalstate-capybara](https://github.com/audi2014/react-globalstate-capybara/)
+
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/audi2014/react-globalstate-capybara/blob/master/LICENSE)
-[![npm version](https://img.shields.io/npm/v/react-globalstate-capybara.svg?style=flat)](https://www.npmjs.com/package/react-globalstate-capybara) 
+[![npm version](https://img.shields.io/npm/v/react-globalstate-capybara.svg?style=flat)](https://www.npmjs.com/package/react-globalstate-capybara)
 [![npm](https://img.shields.io/npm/dw/react-globalstate-capybara.svg)](https://www.npmjs.com/package/react-globalstate-capybara)
 [![npm](https://img.shields.io/npm/v/react-globalstate-capybara.svg)](https://www.npmjs.com/package/react-globalstate-capybara)
 ![](https://img.shields.io/github/languages/code-size/audi2014/react-globalstate-capybara.svg?style=flat)
@@ -8,11 +9,13 @@
 
 # Global state manager for react
 
-### Example: 
+### Example:
+
 [![example react-globalstate-capybara](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/3wk4z1kw6)
 
-### Edit package: 
-[![edit package react-globalstate-capybara](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/j35x6p09ww)
+### Edit package:
+
+[![edit package react-globalstate-capybara](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/xr77n0049o)
 
 ```jsx
 import React from "react";
