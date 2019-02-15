@@ -1,16 +1,8 @@
 {
-  "name": "react-globalstate-capybara",
-  "version": "1.0.0",
-  "description": "global state manager +react hoc",
-  "keywords": [
-    "react",
-    "redux",
-    "state",
-    "global state",
-    "action",
-    "dispatch",
-    "capybara"
-  ],
+  "name": "npm-react-globalstate-capybara",
+  "version": "1.0.1",
+  "description": "",
+  "keywords": [],
   "peerDependencies": {
     "react": "^16.4.0-0"
   },
