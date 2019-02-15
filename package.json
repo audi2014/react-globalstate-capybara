@@ -1,14 +1,27 @@
 {
   "name": "react-globalstate-capybara",
   "version": "1.0.0",
-  "description": "",
-  "keywords": [],
-  "main": "src/index.js",
-  "dependencies": {
-    "react": "16.8.0",
-    "react-dom": "16.8.0",
-    "react-scripts": "2.0.3"
+  "description": "global state manager +react hoc",
+  "keywords": [
+    "react",
+    "redux",
+    "state",
+    "global state",
+    "action",
+    "dispatch",
+    "capybara"
+  ],
+  "peerDependencies": {
+    "react": "^16.4.0-0"
   },
+  "license": "MIT",
+  "author": {
+    "name": "Artur Perepelitsa (github.com/audi2014)",
+    "email": "audi2014@gmail.com"
+  },
+  "repository": "github:audi2014/react-globalstate-capybara",
+  "main": "src/lib/index.js",
+  "dependencies": {},
   "devDependencies": {},
   "scripts": {
     "start": "react-scripts start",

@@ -1,13 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { View, Router } from "./components";
-import Store from "./lib/store";
-import promiseMiddleware from "./lib/store/middlewares/promise";
-import { set, push, clear, sort, filter } from "./lib/store/mutations/array";
-import withGlobalState from "./lib/withGlobalState";
+import Store, { mutations, middlewares, withGlobalState } from "../lib/index";
+
 /** INIT */
-const store = new Store({ users: ["a", "z", "u"], time: "" });
-store.applyDispatchMiddleware(promiseMiddleware);
+const { set, push, clear, sort, filter } = mutations;
+const store = new Store({ users: ["a", "z", "u"], time: "", session: "token" });
+store.applyDispatchMiddleware(middlewares.promiseMiddleware);
 /** create actions */
 
 // const pushUser = store.createAction("users", push);
@@ -44,11 +43,12 @@ const [setTime, fetchTime] = store.createAction("time", [
   // 1 -> as fetchTime
   (e, arg1) => {
     //setTime("loading");
+    // const token = store.getState("session");
     return new Promise(function(resolve, reject) {
       setTimeout(() => {
         const d = new Date();
         resolve(d[arg1]());
-      }, 200);
+      }, 700);
     });
   }
 ]);
