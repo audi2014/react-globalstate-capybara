@@ -4,7 +4,7 @@
 | [![npm version](https://img.shields.io/npm/v/react-globalstate-capybara.svg?style=flat)](https://www.npmjs.com/package/react-globalstate-capybara) | [![npm](https://img.shields.io/npm/dw/react-globalstate-capybara.svg)](https://www.npmjs.com/package/react-globalstate-capybara) |
 | ![](https://img.shields.io/bundlephobia/min/react-globalstate-capybara.svg?style=flat) | ![](https://img.shields.io/github/languages/code-size/audi2014/react-globalstate-capybara.svg?style=flat) |
 | Example: | [![example react-globalstate-capybara](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/3wk4z1kw6) |
-| Edit package: | [![edit package react-globalstate-capybara](https://codesandbox.io/s/github/audi2014/react-globalstate-capybara) |
+| Edit package: | [![edit package react-globalstate-capybara](https://codesandbox.io/s/github/audi2014/react-globalstate-capybara)] |
 
 
 
