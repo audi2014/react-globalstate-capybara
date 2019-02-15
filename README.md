@@ -1,4 +1,4 @@
-# [react-globalstate-capybara](https://reactjs.org/)
+# [react-globalstate-capybara](https://github.com/audi2014/react-globalstate-capybara/)
 
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/audi2014/react-globalstate-capybara/blob/master/LICENSE)
 [![npm version](https://img.shields.io/npm/v/react-globalstate-capybara.svg?style=flat)](https://www.npmjs.com/package/react-globalstate-capybara)
