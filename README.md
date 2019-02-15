@@ -12,14 +12,6 @@
 
 ### Global state manager for react
 
-### Example:
-
-[![example react-globalstate-capybara](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/3wk4z1kw6)
-
-### Edit package:
-
-[![edit package react-globalstate-capybara](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/xr77n0049o)
-
 ```jsx
 import React from "react";
 import ReactDOM from "react-dom";
