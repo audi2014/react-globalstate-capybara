@@ -1,7 +1,4 @@
 import React from "react";
-// import store from "./store";
-
-// const { subscribe, unsubscribe } = store;
 
 export const mapValue = function(key, nextValue, prevValue) {
   return nextValue;
@@ -41,7 +38,7 @@ export default function(
     }
 
     render() {
-      return <Component {...this.props} {..._mapStateToProps(this.state)} />;
+      return React.createElement(Component, {...this.props, ..._mapStateToProps(this.state)});
     }
   };
 }
