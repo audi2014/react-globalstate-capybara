@@ -1,8 +1,8 @@
 {
-  "name": "npm-react-globalstate-capybara",
+  "name": "react-globalstate-capybara",
   "version": "1.0.1",
   "description": "",
-  "keywords": [],
+  "keywords": ["react","globalstate", "capybara", "global-state"],
   "peerDependencies": {
     "react": "^16.4.0-0"
   },
