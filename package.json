@@ -12,8 +12,10 @@
     "email": "audi2014@gmail.com"
   },
   "repository": "github:audi2014/react-globalstate-capybara",
-  "main": "src/lib/index.js",
-  "dependencies": {},
+  "main": "src/index.js",
+  "dependencies": {
+    "react-dom": "16.8.2"
+  },
   "devDependencies": {},
   "scripts": {
     "start": "react-scripts start",

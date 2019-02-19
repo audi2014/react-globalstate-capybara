@@ -38,7 +38,10 @@ export default function(
     }
 
     render() {
-      return React.createElement(Component, {...this.props, ..._mapStateToProps(this.state)});
+      return React.createElement(Component, {
+        ...this.props,
+        ..._mapStateToProps(this.state)
+      });
     }
   };
 }

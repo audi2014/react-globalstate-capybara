@@ -1,58 +1,39 @@
-import d_createAction from "./methods/createAction";
-import d_applyDispatchMiddleware from "./methods/applyDispatchMiddleware";
-import d_subscribe from "./methods/subscribe";
-import d_unsubscribe from "./methods/unsubscribe";
-import d_dispatch from "./methods/dispatch";
-
-export const MGS = [];
-
-export default (initialState = {}, methods = {}) => {
-  const _createAction = methods.createAction || d_createAction;
-  const _subscribe = methods.subscribe || d_subscribe;
-  const _unsubscribe = methods.unsubscribe || d_unsubscribe;
-  const _applyDispatchMiddleware =
-    methods.applyDispatchMiddleware || d_applyDispatchMiddleware;
-  const _dispatch = methods.dispatch || d_dispatch;
-
+import m from "./methods/index";
+import { createMiddleware } from "../common";
+export default (initialState = {}, info) => {
   const store = {};
   const z = {
     state: { ...initialState },
     subscriptions: [],
-    middleware: (k, v) => _dispatch(k, v, store),
-    dispatch: (k, v) => _dispatch(k, v, store)
+    dispatch: v => m.dispatch(v, store),
+    createAction: (key, mutation, info = "") => {
+      return m.createAction({ key, mutation, info }, store);
+    },
+    subscribe: (cb, storeprops = [], info = "") => {
+      z.subscriptions = m.subscribe(cb, storeprops, info, store);
+      return cb; // return subscr id
+    },
+    unsubscribe: (cb, storeprops = []) => {
+      z.subscriptions = m.unsubscribe(cb, store.getSubscriptions);
+    },
+    setState: nextState => {
+      z.state = m.setState(z.state, nextState);
+      return z.state;
+    }
   };
+  [...Object.keys(m)].forEach(k => {
+    store[k] = z[k];
+  });
 
-  store.getState = function(key) {
+  store.getState = key => {
     return z.state[key];
   };
-  store.setState = function(nextState) {
-    z.state = { ...z.state, ...nextState };
-    return z.state;
-  };
-  store.getSubscriptions = function() {
+  store.getSubscriptions = () => {
     return [...z.subscriptions];
   };
-  store.dispatch = function(k, v) {
-    z.middleware(k, v);
-  };
-  store.applyDispatchMiddleware = function(m) {
-    z.middleware = _applyDispatchMiddleware(
-      m,
-      { ...store, dispatch: z.dispatch },
-      z.middleware
-    );
-  };
-  store.createAction = function(key, mutation) {
-    return _createAction(key, mutation, store);
-  };
-  store.subscribe = function(cb, storeprops = []) {
-    z.subscriptions = _subscribe(cb, storeprops, store);
-    return cb; // return subscr id
-  };
-  store.unsubscribe = function(cb, storeprops = []) {
-    z.subscriptions = _unsubscribe(cb, store.getSubscriptions);
-  };
-
-  MGS.push(store);
+  store.applyMiddleware = (mid, method) =>
+    (store[method] = m[method]
+      ? createMiddleware(mid, { ...store, ...z }, store[method])
+      : console.error("use", Object.keys(m)));
   return store;
 };

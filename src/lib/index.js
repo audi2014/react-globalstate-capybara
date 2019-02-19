@@ -1,13 +1,9 @@
-import Store from "./store";
-import promiseMiddleware from "./store/middlewares/promise";
-import * as arrayMutations from "./store/mutations/array";
-import hoc from "./withGlobalState";
+import Store from "./store/";
+import * as middlewares from "./middlewares/";
+import * as mutations from "./mutations/";
+import * as bind from "./bind/";
+import * as global from "./global";
+
+export { global, middlewares, mutations, bind };
 
 export default Store;
-export const withGlobalState = hoc;
-export const middlewares = {
-  promise: promiseMiddleware
-};
-export const mutations = {
-  array: arrayMutations
-};
