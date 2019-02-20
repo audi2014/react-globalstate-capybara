@@ -1,12 +1,9 @@
-
-|[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/audi2014/react-globalstate-capybara/blob/master/LICENSE)|  ![enter image description here](https://github.com/audi2014/react-globalstate-capybara/raw/master/CoreConcepts.jpg) |
-|--|--|
-| [![npm version](https://img.shields.io/npm/v/react-globalstate-capybara.svg?style=flat)](https://www.npmjs.com/package/react-globalstate-capybara) | [![npm](https://img.shields.io/npm/dw/react-globalstate-capybara.svg)](https://www.npmjs.com/package/react-globalstate-capybara) |
-| ![](https://img.shields.io/bundlephobia/min/react-globalstate-capybara.svg?style=flat) | ![](https://img.shields.io/github/languages/code-size/audi2014/react-globalstate-capybara.svg?style=flat) |
-| Example: | [![example react-globalstate-capybara](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/3wk4z1kw6) |
-| Edit package: |[![example react-globalstate-capybara](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/audi2014/react-globalstate-capybara) |
-
-
+| [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/audi2014/react-globalstate-capybara/blob/master/LICENSE) | ![enter image description here](https://github.com/audi2014/react-globalstate-capybara/raw/master/CoreConcepts.jpg)                                                  |
+| -------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [![npm version](https://img.shields.io/npm/v/react-globalstate-capybara.svg?style=flat)](https://www.npmjs.com/package/react-globalstate-capybara) | [![npm](https://img.shields.io/npm/dw/react-globalstate-capybara.svg)](https://www.npmjs.com/package/react-globalstate-capybara)                                     |
+| ![](https://img.shields.io/bundlephobia/min/react-globalstate-capybara.svg?style=flat)                                                             | ![](https://img.shields.io/github/languages/code-size/audi2014/react-globalstate-capybara.svg?style=flat)                                                            |
+| Example:                                                                                                                                           | [![example react-globalstate-capybara](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/3wk4z1kw6)                                  |
+| Edit package:                                                                                                                                      | [![example react-globalstate-capybara](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/audi2014/react-globalstate-capybara) |
 
 # [react-globalstate-capybara](https://github.com/audi2014/react-globalstate-capybara/)
 
@@ -16,17 +13,30 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { View, Router } from "./components";
-import Store, {
-  mutations,
-  middlewares,
-  withGlobalState
-} from "react-globalstate-capybara";
+import createStore, * as helpers from "./lib/index";
+const { global, middlewares, mutations, bind } = helpers;
+const { set, push, clear, sort, filter } = mutations.array;
+
+/** INIT by global */
+// global.applyGlobalMiddleware((anyStore, state, info) => {
+//   anyStore.applyMiddleware(middlewares.dispatch.promise, "dispatch");
+//   anyStore.applyMiddleware(middlewares.dispatch.memo, "dispatch");
+// });
+// const createStoreWithRockNRoll = global.wrapStoreCreator(createStore);
+// const store = createStoreWithRockNRoll({
+//   users: ["a", "z", "u"],
+//   time: "",
+//   session: "token"
+// });
 
 /** INIT */
-const { set, push, clear, sort, filter } = mutations.array;
-const store = new Store({ users: ["a", "z", "u"], time: "", session: "token" });
-
-store.applyDispatchMiddleware(middlewares.promise);
+const store = createStore({
+  users: ["a", "z", "u"],
+  time: "",
+  session: "token"
+});
+store.applyMiddleware(middlewares.dispatch.promise, "dispatch");
+store.applyMiddleware(middlewares.dispatch.memo, "dispatch");
 /** create actions */
 
 // const pushUser = store.createAction("users", push);
@@ -73,15 +83,15 @@ const [setTime, fetchTime] = store.createAction("time", [
 ]);
 
 /** bind componet with store props */
-const Users = withGlobalState(View, store, ["users"]);
-const Time = withGlobalState(View, store, ["time"]);
-const All = withGlobalState(View, store, ["time", "users"]);
+const Users = bind.withGlobalState(View, store, ["users"]);
+const Time = bind.withGlobalState(View, store, ["time"]);
+const All = bind.withGlobalState(View, store, ["time", "users"]);
 
 /** just test */
 function App() {
   return (
     <div>
-      <p>
+      <div>
         Users
         <Users
           actions={{
@@ -94,8 +104,8 @@ function App() {
               filterUsers(prompt("name is:"), (value, u) => u === value)
           }}
         />
-      </p>
-      <p>
+      </div>
+      <div>
         Time
         <Time
           actions={{
@@ -104,21 +114,21 @@ function App() {
             setTime: ({ v = new Date() }) => setTime(v)
           }}
         />
-      </p>
+      </div>
       <p>to test unsubscribe:</p>
       <Router>
-        <p>
+        <div>
           All
           <All />
-        </p>
-        <p>
+        </div>
+        <div>
           Time
           <Time />
-        </p>
-        <p>
+        </div>
+        <div>
           Users
           <Users />
-        </p>
+        </div>
       </Router>
     </div>
   );

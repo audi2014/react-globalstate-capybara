@@ -1,6 +1,6 @@
 {
   "name": "react-globalstate-capybara",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "description": "managing global state for react",
   "keywords": ["react", "globalstate", "capybara", "global-state"],
   "peerDependencies": {
@@ -12,7 +12,7 @@
     "email": "audi2014@gmail.com"
   },
   "repository": "github:audi2014/react-globalstate-capybara",
-  "main": "src/index.js",
+  "main": "src/lib/index.js",
   "dependencies": {
     "react-dom": "16.8.2"
   },
