@@ -14,7 +14,7 @@
   "repository": "github:audi2014/react-globalstate-capybara",
   "main": "src/lib/index.js",
   "dependencies": {
-    "react-dom": "16.8.2"
+    "react-dom": "19.2.3"
   },
   "devDependencies": {},
   "scripts": {
